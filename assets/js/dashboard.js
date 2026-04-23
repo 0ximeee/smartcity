@@ -1,4 +1,5 @@
 import { observeAuth, logoutUser, getCurrentUserProfile } from "./auth.js"
+
 const userName = document.getElementById('userName')
 const navUserName = document.getElementById('navUserName')
 const userEmail = document.getElementById('userEmail')

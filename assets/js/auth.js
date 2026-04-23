@@ -48,8 +48,8 @@ export async function loginUser({email, password}){
 }
   
 export async function getCurrentUserProfile(uid){
-    const doc = doc(db, 'user', uid)
-    const user = await getDoc(doc)
+    const docUser = doc(db, 'users', uid)
+    const user = await getDoc(docUser)
 
     if (!user.exists()) return null
 

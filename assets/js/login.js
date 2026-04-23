@@ -11,7 +11,7 @@ observeAuth((user)=>{
     }
 })
 
-form?.addEventListener('submit', (e) => {
+form?.addEventListener('submit', async(e) => {
     e.preventDefault()
 
     hideAlert('loginAlert')
@@ -31,7 +31,7 @@ form?.addEventListener('submit', (e) => {
             '<i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión', 'Iniciando Sesión'
         )
         await loginUser ({email, password})
-        window.location.href = './../../dashboard.hmtl'
+        window.location.href = './../../dashboard.html'
         
         
     } catch (error) {

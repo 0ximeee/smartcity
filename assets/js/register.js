@@ -5,16 +5,16 @@ const nameInput = document.getElementById('name')
 const emailInput = document.getElementById('email')
 const cityInput = document.getElementById('city')
 const passwordInput = document.getElementById('password')
-const confirmPasswordInput = document.getElementById('confirmpassword')
+const confirmPasswordInput = document.getElementById('confirmPassword')
 const registerBtn = document.getElementById('registerBtn')
 const successBox = document.getElementById('registerSuccess')
 
-form?.addEventListener ('submit', (e) =>{
+form?.addEventListener ('submit', async (e) =>{
     e.preventDefault()
 
     hideAlert('registerAlert')
-    successBox.classList.add('d-none')
-    successBox.textContent = ''
+    //successBox?.classList.add('d-none')
+    //successBox?.textContent = ''
 
     const name = nameInput.value.trim()
     const email = emailInput.value.trim()
@@ -28,8 +28,8 @@ form?.addEventListener ('submit', (e) =>{
     }
 
     // if para contraseña menor a 6 caracteres
-    if (password < ){
-        showAlert('registerAlert', 'Las contraseñas no son iguales')
+    if (password.length < 6){
+        showAlert('registerAlert', 'La contraseña debe tener más de 6 caracteres')
         return
     }
     
@@ -46,11 +46,11 @@ form?.addEventListener ('submit', (e) =>{
             )
             await registerUser ({name, email, password, favoriteCity})
 
-            successBox.textContent = 'Cuenta creada correctamente'
-            successBox.classList.remove('d-none')
+            //successBox?.textContent = 'Cuenta creada correctamente'
+            //successBox?.classList.remove('d-none')
 
             setTimeout(()=>{
-                window.location.href = './../../dashboard.hmtl'
+                window.location.href = './../../login.html'
             }, 1200)
                
         } catch (error) {

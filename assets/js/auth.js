@@ -12,20 +12,30 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 import {auth, db} from "./firebase-config.js";
 
-export function showAlert(elementId, message){
-    const alert = document.getElementById(elementId)
-    if (!alert) return
-    alert.textContent = message
-    alert.classList.remove('d-none')
+export function showAlert(elementId, message) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  el.textContent = message;
+  el.classList.remove("d-none");
 }
 
-export function hideAlert(elementId){
-    const alert = document.getElementById(elementId)
-    if (!alert) return
-    alert.classList.add('d-none')
-    alert.textContent = ''
+export function hideAlert(elementId) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  el.classList.add("d-none");
+  el.textContent = "";
 }
 
+export function setButtonLoading(button, isLoading, text, loadingText = 'Procesando...'){
+    if (!button) return
+
+    button.disabled = isLoading
+    button.innerHTML = isLoading ? `
+     <span class="spinner-border spinner-border-sm me-2" aria-hidden="true">
+     </span>
+     ${loadingText}
+     `:text
+}
 export async function registerUser({name, email, password, favoriteCity}){
     const credential = await createUserWithEmailAndPassword(auth, email, password)
 
@@ -47,13 +57,13 @@ export async function loginUser({email, password}){
     return credential.user
 }
   
-export async function getCurrentUserProfile(uid){
-    const docUser = doc(db, 'users', uid)
-    const user = await getDoc(docUser)
+export async function getCurrentUserProfile(uid) {
+  const ref = doc(db, "users", uid);
+  const snap = await getDoc(ref);
 
-    if (!user.exists()) return null
+  if (!snap.exists()) return null;
 
-    return user.data()
+  return snap.data();
 }
 
 export function observeAuth(callback){
@@ -87,13 +97,4 @@ export async function getFirebaseErrorMessage(error){
 
 }
 
-export function setButtonLoading(button, isLoading, text, loadingText = 'Procesando...'){
-    if (!button) return
 
-    button.disabled = isLoading
-    button.innerHTML = isLoading ? `
-     <span class="spinner-border spinner-border-sm me-2" aria-hidden="true">
-     </span>
-     ${loadingText}
-     `:text
-}

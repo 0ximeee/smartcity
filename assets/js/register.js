@@ -60,7 +60,7 @@ form?.addEventListener ('submit', async (e) =>{
             setButtonLoading(
                 registerBtn, 
                 false, 
-                '<i class="bi bi-person-check me-2"></i>Creando Cuenta'
+                '<i class="bi bi-person-check me-2"></i>Crear Cuenta'
             )
         }
 

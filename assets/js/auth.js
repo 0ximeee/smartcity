@@ -8,8 +8,10 @@ import {
     doc,
     setDoc,
     getDoc,
+    updateDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
 import {auth, db} from "./firebase-config.js";
 
 export function showAlert(elementId, message) {
@@ -59,12 +61,16 @@ export async function loginUser({email, password}){
   
 export async function getCurrentUserProfile(uid) {
   const ref = doc(db, "users", uid);
-  const snap = await getDoc(ref);
+  await updateDoc(user, {
+    ...data,
+    updateAt: serverTimestamp()
+  });
 
   if (!snap.exists()) return null;
 
   return snap.data();
 }
+
 
 export function observeAuth(callback){
     return onAuthStateChanged(auth, callback)
